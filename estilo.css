@@ -1,0 +1,121 @@
+body{
+    color: #000000;
+    font-family: helvetica, verdana, arial;
+    font-size: 12px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.pagina{
+    border: 1px solid #000000;
+    width: 90%;
+}
+
+.menu{
+    background-color: #cccccc;
+    float: left;
+    width: 24%;
+}
+
+.subpagina{
+    float: left;
+    width: 75%;
+}
+
+.limpar{ clear: left;}
+
+.menutitulo{
+    background-color: gray;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 4px 1% 4px 1%;
+    width: 98%;
+}
+
+.menulink{
+    color: #000000;
+    display: block;
+    text-decoration: none;
+}
+
+.sptitulo{
+    background-color: gray;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 4px 1% 4px 1%;
+    width: 98%;
+}
+
+.flinha{
+    width: 100%;
+}
+
+.flable{
+    float: left;
+    margin-right: 1%;
+    padding-top: 3px;
+    text-align: right;
+    width: 28%;
+}
+
+.finput{
+    float: left;
+    text-align: left;
+    width: 70%;
+}
+
+.fcampo{
+    boder: 1px slid gray;
+    font-size: 12px;
+}
+
+.ltitulo{
+    background-color: gray;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.llinha1{
+    background-color: #cccccc;
+    font-size: 12px;
+}
+
+.llinha2{
+    background-color: #ffffff;
+    font-size: 12px;
+}
+
+.fbotao{
+    boder: 1px solid gray;
+    background-color: #cccccc;
+    font-size: 12px;
+    padding: 4px;
+}
+
+.erro{
+    background-color: #FFD5D5;
+    border: 1px solid red;
+    color: red;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: center;
+    width: 80%;
+}
+
+.ok{
+    background-color: #D5E6D5;
+    border: 1px solid green;
+    color: green;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: center;
+    width: 80%;
+}
