@@ -4,6 +4,7 @@ $pagina = "admin_inicio.php?sp=" . $_REQUEST["sp"];
 $btnnome = "cad";
 $btnvalue = "Cadastrar";
 $catnome = "";
+
 //Cadastro
 if (isset($_REQUEST["cad"])) {
     $catnome = $_REQUEST["catnome"];
@@ -47,7 +48,7 @@ if (isset($_REQUEST["alt"])) {
     } else {
         $sqlrpt = "select * from categoria where catnome = '" . $catnome . "' and catcod <> '" . $catcod . "'";
         $sqlrpt = mysqli_query($con, $sqlrpt);
-        if (mysqli_num_rows($qryrpt) > 0) {
+        if (mysqli_num_rows($sqlrpt) > 0) {
             echo "<div class='erro'>Dado já existe</div>";
         } else {
 

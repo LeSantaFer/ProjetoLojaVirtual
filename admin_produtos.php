@@ -64,12 +64,13 @@ if (isset($_REQUEST["alt"])) {
     $pronome = $_REQUEST["pronome"];
     $provalor = $_REQUEST["provalor"];
     $procategoria = $_REQUEST["procategoria"];
+    $prodescricao = $_REQUEST["prodescricao"];
     if (($pronome == "") || ($provalor == "") || ($procategoria == "") || ($prodescricao == "")) {
         echo "<div class='erro'>Campo obrigatório em branco <div>";
     } else {
-        $sqlrpt = "selct * from produto where pronome = '" . $pronome . "'and procod <> '" . $procod . "'";
+        $sqlrpt = "select * from produto where pronome = '" . $pronome . "' and   procod <>'" . $procod . "'";
         $qryrpt = mysqli_query($con, $sqlrpt);
-        if (mysqli_numrows($qryrpt) > 0) {
+        if (mysqli_num_rows($qryrpt) > 0) {
             echo "<div class = 'erro'>Dado jáexiste</div>";
         } else {
             //Formata valor de 1.580,95 para 1580.95 [brasil->americano)
@@ -77,7 +78,7 @@ if (isset($_REQUEST["alt"])) {
             $provalor = str_replace(",", ".", $provalor);
 
             $sqlins = "update produto
-                        set pronome=" . $pronome . "', provalor='" . $provalor . "',
+                        set pronome='" . $pronome . "', provalor='" . $provalor . "',
                             procategoria='" . $procategoria . "',prodescricao='" . $prodescricao . "'
                         where procod ='" . $procod . "'";
             $qryins = mysqli_query($con, $sqlins);
@@ -98,7 +99,7 @@ if (isset($_REQUEST["exc"])) {
     if (mysqli_num_rows($qryrpt) > 0) {
         echo "<div class = 'erro'> Dado em uso em outra tabela </div>";
     } else {
-        $sqlins = "delete from produto whwre procod='" . $procod . "'";
+        echo $sqlins = "delete from produto where procod='" . $procod . "'";
         $qryins = mysqli_query($con, $sqlins);
         echo "<div class = 'ok'> Exclusão realisada</div>";
         $procod = "";
@@ -133,20 +134,20 @@ if (isset($_REQUEST["exc"])) {
         <div class="finput">
             <select name="procategoria" class=" fcampo" style="width:60%">
                 <option value="">Selecione</option>
-<?php
-$sqlc = "select * from categoria order by catnome";
-$qryc = mysqli_query($con, $sqlc);
-while ($resc = mysqli_fetch_array($qryc)) {
-    $sel = "";
-    if ($procategoria == $resc["catcod"]) {
-        $sel = "selected";
-    }
-    ?>
-                    <option value="<?php echo $resc["catcod"] ?>"<?php echo $sel; ?>>
-                    <?php echo $resc["catnome"] ?></option>
-                        <?php
+                <?php
+                $sqlc = "select * from categoria order by catnome";
+                $qryc = mysqli_query($con, $sqlc);
+                while ($resc = mysqli_fetch_array($qryc)) {
+                    $sel = "";
+                    if ($procategoria == $resc["catcod"]) {
+                        $sel = "selected";
                     }
                     ?>
+                    <option value="<?php echo $resc["catcod"] ?>"<?php echo $sel; ?>>
+                        <?php echo $resc["catnome"] ?></option>
+                    <?php
+                }
+                ?>
             </select>   
         </div>
         <div class="limpar"></div>
@@ -155,7 +156,7 @@ while ($resc = mysqli_fetch_array($qryc)) {
         <div class="flabel ">Descrição*:</div>
         <div class="finput">
             <textarea class="fcampo" name="prodescricao" rows="4" cols="40">
-<?php echo $prodescricao; ?></textarea>
+                <?php echo $prodescricao; ?></textarea>
         </div>
         <div class="limpar"></div>
     </div>
@@ -173,12 +174,12 @@ while ($resc = mysqli_fetch_array($qryc)) {
         <td width="16"></td>
         <td width="16"></td>
     </tr>
-<?php
-$sqllst = "select * from produto, categoria where catcod = procategoria order by pronome";
-$qrylst = mysqli_query($con, $sqllst);
-$class = "llinha1";
-while ($reslst = mysqli_fetch_array($qrylst)) {
-    ?>
+    <?php
+    $sqllst = "select * from produto, categoria where catcod = procategoria order by pronome";
+    $qrylst = mysqli_query($con, $sqllst);
+    $class = "llinha1";
+    while ($reslst = mysqli_fetch_array($qrylst)) {
+        ?>
         <tr class ="<?php echo $class ?>">
             <td><?php echo $reslst["procod"] ?></td>
             <td><?php echo $reslst["pronome"] ?></td>
@@ -200,12 +201,12 @@ while ($reslst = mysqli_fetch_array($qrylst)) {
                 </a>
             </td>
         </tr>
-    <?php
-    if ($class == "llinha1") {
-        $class = "llinha2";
-    } else {
-        $class = "llinha1";
+        <?php
+        if ($class == "llinha1") {
+            $class = "llinha2";
+        } else {
+            $class = "llinha1";
+        }
     }
-}
-?>
+    ?>
 </table>
