@@ -1,6 +1,6 @@
 <div class="sptitulo">Categorias</div>
 <?php
-$pagina = "admin_inicio.php?sp=".$_REQUEST["sp"];
+$pagina = "admin_inicio.php?sp=" . $_REQUEST["sp"];
 $btnnome = "cad";
 $btnvalue = "Cadastrar";
 $catnome = "";
@@ -10,13 +10,13 @@ if (isset($_REQUEST["cad"])) {
     if ($catnome == "") {
         echo "<div class'erro'>Campo obrigatório em branco</div>";
     } else {
-        $sqlrpt = "select * from categoria where catnome=' " . $catnome . "'";
+        $sqlrpt = "select * from categoria where catnome= ' " . $catnome . "'";
         $qryrpt = mysqli_query($con, $sqlrpt);
         if (mysqli_num_rows($qryrpt) > 0) {
             echo "<div class = 'erro'>Dado já existe</div>";
         } else {
             $sqlins = "insert into categoria (catnome) values ('" . $catnome . "')";
-            $qryins = mysqli_query($con,$sqlins);
+            $qryins = mysqli_query($con, $sqlins);
             echo "<div class='ok'>Cadastro realizado</div>";
             $catnome = "";
         }
@@ -26,7 +26,7 @@ if (isset($_REQUEST["cad"])) {
 //Seleção de Dados
 if (isset($_REQUEST["acao"])) {
     $sqlsel = "select * from categoria where catcod = '" . $_REQUEST["id"] . "'";
-    $qrysel = mysqli_query($sqlsel, $con);
+    $qrysel = mysqli_query($con, $sqlsel);
     $ressel = mysqli_fetch_array(($qrysel));
     $catcod = $ressel["catcod"];
     $catnome = $ressel["catnome"];
@@ -46,13 +46,13 @@ if (isset($_REQUEST["alt"])) {
         echo "<div class='erro'>Campo obrigatório em branco</div>";
     } else {
         $sqlrpt = "select * from categoria where catnome = '" . $catnome . "' and catcod <> '" . $catcod . "'";
-        $sqlrpt = mysqli_query($sqlrpt, $con);
+        $sqlrpt = mysqli_query($con, $sqlrpt);
         if (mysqli_num_rows($qryrpt) > 0) {
             echo "<div class='erro'>Dado já existe</div>";
         } else {
 
             $sqlins = "update categoria set catnome='" . $catnome . "'where catcod ='" . $catcod . "'";
-            $qryins = mysqli_query($sqlins,$con);
+            $qryins = mysqli_query($con, $sqlins);
             echo "<div class='ok'>Alteração realizada </div>";
             $catcod = "";
             $catnome = "";
@@ -64,18 +64,20 @@ if (isset($_REQUEST["alt"])) {
 if (isset($_REQUEST["exc"])) {
     $catcod = $_REQUEST["catcod"];
     $sqlrpt = "select * from produto where procategoria = '" . $catcod . "'";
-    $qryrpt = mysqli_query($sqlrpt, $con);
+    $qryrpt = mysqli_query($con, $sqlrpt);
     if (mysqli_num_rows($qryrpt) > 0) {
         echo "<div class='erro'>Dado em uso em outra tabela</div>";
     } else {
         $sqlins = "delete from categoria where catcod = '" . $catcod . "'";
-        $qryins = mysqli_query($sqlins, $con);
+        $qryins = mysqli_query($con, $sqlins);
         echo "<div class='ok'>Exclusão realizada</div>";
         $catcod = "";
         $catnome = "";
     }
 }
 ?>
+
+
 <form method="post" action="<?php echo $pagina ?>">
     <input type="hidden" name="catcod" value="<?php echo $catcod ?>"/>
     <div class="flinha">
@@ -99,7 +101,7 @@ if (isset($_REQUEST["exc"])) {
     </tr>
     <?php
     $sqllst = "select * from categoria order by catnome";
-    $qrylst = mysqli_query($con,$sqllst);
+    $qrylst = mysqli_query($con, $sqllst);
     $class = "llinhal";
     while ($reslst = mysqli_fetch_array($qrylst)) {
         ?>
@@ -107,22 +109,22 @@ if (isset($_REQUEST["exc"])) {
             <td><?php echo $reslst["catcod"] ?></td>
             <td><?php echo $reslst["catnome"] ?></td>
             <td width="24">
-                <a href="<?php echo $pagina ?> &acao=alt&id=<?php echo $reslst["catcod"] ?>">
+                <a href="<?php echo $pagina ?>&acao=alt&id=<?php echo $reslst["catcod"] ?>">
                     <img src="img\alterar.png" boder="0" width="16" />
                 </a>
             </td>
             <td width="24">
-                <a href="<?php echo $pagina ?> &acao=exc&id=<?php echo $reslst["catcod"] ?>">
+                <a href="<?php echo $pagina ?>&acao=exc&id=<?php echo $reslst["catcod"] ?>">
                     <img src="img\excluir.png" boder="0" width="16" />
                 </a>
             </td>
         </tr>
         <?php
-            if ($class == "llinhal") {
-                $class = "llinha2";
-            } else {
-                $class = "llinhal";
-            }
+        if ($class == "llinhal") {
+            $class = "llinha2";
+        } else {
+            $class = "llinhal";
         }
+    }
     ?>
 </table>
